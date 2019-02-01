@@ -1,0 +1,68 @@
+#### SparkSession
++ You control your Spark Application through a driver process called the SparkSession.
+ 
+ `res0: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@...`
+
+#### RDD
+
+#### DataFrames
+
+
+#### DataSet
+
+#### DataFrames Versus Datasets
++ **untyped** DataFrames and the **typed** Datasets
++ To say that DataFrames are untyped is aslightly inaccurate; they have types, but Spark maintains them completely and only checks whether those types line up to those specified in the
+  schema at ***runtime***
++  Datasets, on the other hand, check whether types conform to the specification at
+  compile ***time***
++  Datasets are only available to Java Virtual Machine (JVM) – based languages (Scala
+  and Java) and we specify types with case classes or Java beans.
++ DataFrames are simply Datasets of Type **Row**(The ***Row*** type is Spark’s internal representation of its optimized inmemory format for computation,JVM datatypes cause cause high **GC** and **instantiation costs**)
+
+#### Columns
++ Columns represent a simple type like an integer or string, a complex type like an array or map, or a
+     null value, Spark Column types are as columns in a table
+     
+#### Rows
++ A row is nothing more than a record of data. Each record in a DataFrame must be of type Row
+
+#### Spark Types
++ Spark types are internal type representations
+
+In Scala
+> ```scala
+> import org.apache.spark.sql.types._
+> val b = ByteType
+>```
+
+In Java
+
+> ```java
+> import org.apache.spark.sql.types.DataTypes;
+> ByteType x = DataTypes.ByteType;
+>```
+
+#### Spark Types in Scala
+
+| DataType | Value type in Scala  |API to access or create a data type|
+| -------- | ----------- |--------|
+|ByteType|Byte|ByteType|
+|ShortType|Short|ShortType|
+|IntegerType|Int|IntegerType|
+|LongType|Long|LongType|
+|FloatType|Float|FloatType|
+|DoubleType|Double|DoubleType|
+|DecimalType|java.math.BigDecimal|DecimalType|
+|StringType|String|StringType|
+|BinaryType|Array[Byte]|BinaryType|
+|BooleanType|Boolean|BooleanType|
+|TimestampType|java.sql.Timestamp|TimestampType|
+|DateType|java.sql.Date|DateType|
+|ArrayType|scala.collection.Seq|ArrayType(elementType, [containsNull]). Note: The default value of containsNull is true.|
+|MapType|scala.collection.Map|MapType(keyType, valueType, [valueContainsNull]). Note: The default value of valueContainsNull is true.|
+|StructType|org.apache.spark.sql.Row|StructType(fields). Note: fields is an Array of StructFields. Also, fields with the same name are not allowed.|
+|StructField|The value type in Scala of the data type of this field (for example, Int for a StructField with the data type IntegerType)|StructField(name, dataType, [nullable]). Note: The default value of nullable is true.|
+
+
+
